@@ -23,14 +23,17 @@ if __name__ == '__main__':
             # Convert the characters in line to lowercase to avoid case mismatch
             line = line.lower()
 
-            # Remove the punctuation marks from the line
+            # Remove the punctuation marks from the line and hy
+            line = re.sub(r"[,.;@#?!&$]+\ *", " ", line)
+            line = re.sub("-", " ", line)
             line = line.translate(line.maketrans("", "", string.punctuation))
 
             # split line on whitespace and punctuation
-            words = re.split('[ \W]', line)
-            print(words)
+            #line = re.sub('\w+(?:-\w+)*', ' ', line)
+            words = re.split('[ \t]', line)
+            # print(words)
             for word in words:
-                if word is "":
+                if word == "":
                     break
                 if word in dictionary:
                     dictionary[word] = dictionary[word] + 1
