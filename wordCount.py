@@ -27,13 +27,16 @@ if __name__ == '__main__':
             line = line.translate(line.maketrans("", "", string.punctuation))
 
             # split line on whitespace and punctuation
-            # word = re.split('[ \t]', line)
-            for words in line:
-                if words in dictionary:
-                    dictionary[words] = dictionary[words]+1
+            words = re.split('[ \W]', line)
+            print(words)
+            for word in words:
+                if word is "":
+                    break
+                if word in dictionary:
+                    dictionary[word] = dictionary[word] + 1
                 else:
-                    dictionary[words] = 1
+                    dictionary[word] = 1
     with open(output_file_name, "w")as outputFile:
         for word in sorted(dictionary):
-            outputFile.write(word+" "+str(dictionary[word])+"\n")
+            outputFile.write(word + " " + str(dictionary[word]) + "\n")
     outputFile.close()
