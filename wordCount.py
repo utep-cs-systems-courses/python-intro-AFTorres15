@@ -1,51 +1,39 @@
-# Node class
-class Node:
+# Imported Libraries
+import sys
+import re
+import string
 
-    # Function to initialize the node object
-    def __init__(self, data):
-        self.data = data  # Assign data
-        self.next = None  # Initialize
-        # next as null
-        self.wordCount = 1
+input_file_name = sys.argv[1]
+output_file_name = sys.argv[2]
 
-
-# Linked List class
-class LinkedList:
-
-    # Function to initialize the Linked
-    # List object
-    def __init__(self):
-        self.head = None
-
-
-# Code execution starts here Main
-
-
-# Print linked list
-def printlist(llist):
-    tmp = llist.head
-
-    while tmp.next is not None:
-        print(tmp.data, tmp.wordCount)
-        tmp = tmp.next
-
+# Word dictionary
+dictionary = {}
 
 if __name__ == '__main__':
-    # Start with the empty list
-    llist = LinkedList()
+    if len(sys.argv) != 3:
+        print("Correct usage: wordCount.py <input text file> <output file>")
+        exit()
 
-    f = open("speech.txt", "r")
-    counter = 0
-    # x = f.readline()
-    Lines = f.readlines()
-    # x = x.split()
-    llist.head = Node("first")
-    temp = llist.head
-    for line in Lines:
-        oneLine = line.strip().split()
-        for word in oneLine:
-            temp.data = word
-            temp.next = Node("Temporary")
-            temp = temp.next
+    # attempt to open input file and write in it
+    with open(input_file_name, 'r') as inputFile:
+        for line in inputFile:
+            # Remove the leading spaces and newline character
+            line = line.strip()
 
-    printlist(llist)
+            # Convert the characters in line to lowercase to avoid case mismatch
+            line = line.lower()
+
+            # Remove the punctuation marks from the line
+            line = line.translate(line.maketrans("", "", string.punctuation))
+
+            # split line on whitespace and punctuation
+            # word = re.split('[ \t]', line)
+            for words in line:
+                if words in dictionary:
+                    dictionary[words] = dictionary[words]+1
+                else:
+                    dictionary[words] = 1
+    with open(output_file_name, "w")as outputFile:
+        for word in sorted(dictionary):
+            outputFile.write(word+" "+str(dictionary[word])+"\n")
+    outputFile.close()
