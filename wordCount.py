@@ -1,7 +1,6 @@
 # Imported Libraries
 import sys
 import re
-import string
 
 input_file_name = sys.argv[1]
 output_file_name = sys.argv[2]
@@ -22,14 +21,11 @@ if __name__ == '__main__':
 
             # Convert the characters in line to lowercase to avoid case mismatch
             line = line.lower()
-            line = re.sub("-", " ", line)
+            line = re.sub(r"-", " ", line)
+            line = re.sub(r'"', " ", line)
+
             # Remove the punctuation marks from the line and hy
-            line = re.sub(r"[,.;@#?!&$]+\ *", " ", line)
-
-            line = line.translate(line.maketrans("", "", string.punctuation))
-
-            # split line on whitespace and punctuation
-            #line = re.sub('\w+(?:-\w+)*', ' ', line)
+            line = re.sub(r"[':,.;@#?!&$-]+\ *", " ", line)
             words = re.split('[ \t]', line)
             # print(words)
             for word in words:
@@ -41,5 +37,6 @@ if __name__ == '__main__':
                     dictionary[word] = 1
     with open(output_file_name, "w")as outputFile:
         for word in sorted(dictionary):
+            # for word in sorted(dictionary, key=lambda kv: kv[1], reverse=True):
             outputFile.write(word + " " + str(dictionary[word]) + "\n")
     outputFile.close()
