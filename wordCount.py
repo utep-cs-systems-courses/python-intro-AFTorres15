@@ -36,12 +36,7 @@ if __name__ == '__main__':
                 else:
                     dictionary[word] = 1
     wordOrders = sorted(dictionary.items(), key=lambda x: x[1], reverse=True)
-    #dictionary = sorted(dictionary)
-    #sorted(dictionary)
-    print(wordOrders)
-    #with open(output_file_name, "w")as outputFile:
-    #    for word in sorted(dictionary):
-    #    #for word in sorted(dictionary.items(), key=lambda x: x[1], reverse=True):
-    #        #     # for word in sorted(dictionary, key=lambda kv: kv[1], reverse=True):
-    #        outputFile.write(word + " " + str(dictionary[word]) + "\n")
-    #outputFile.close()
+    with open(output_file_name, "w")as outputFile:
+        for i in wordOrders:
+            outputFile.write(i[0] + " " + str(i[1]) + "\n")
+    outputFile.close()
