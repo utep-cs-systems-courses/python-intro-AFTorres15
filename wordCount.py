@@ -37,6 +37,7 @@ if __name__ == '__main__':
                     dictionary[word] = 1
     wordOrders = sorted(dictionary.items(), key=lambda x: x[1], reverse=True)
     with open(output_file_name, "w")as outputFile:
+        # Descending order
         for i in wordOrders:
             outputFile.write(i[0] + " " + str(i[1]) + "\n")
     outputFile.close()
