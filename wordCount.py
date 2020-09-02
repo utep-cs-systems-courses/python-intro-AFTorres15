@@ -35,8 +35,13 @@ if __name__ == '__main__':
                     dictionary[word] = dictionary[word] + 1
                 else:
                     dictionary[word] = 1
-    with open(output_file_name, "w")as outputFile:
-        for word in sorted(dictionary):
-            # for word in sorted(dictionary, key=lambda kv: kv[1], reverse=True):
-            outputFile.write(word + " " + str(dictionary[word]) + "\n")
-    outputFile.close()
+    wordOrders = sorted(dictionary.items(), key=lambda x: x[1], reverse=True)
+    #dictionary = sorted(dictionary)
+    #sorted(dictionary)
+    print(wordOrders)
+    #with open(output_file_name, "w")as outputFile:
+    #    for word in sorted(dictionary):
+    #    #for word in sorted(dictionary.items(), key=lambda x: x[1], reverse=True):
+    #        #     # for word in sorted(dictionary, key=lambda kv: kv[1], reverse=True):
+    #        outputFile.write(word + " " + str(dictionary[word]) + "\n")
+    #outputFile.close()
