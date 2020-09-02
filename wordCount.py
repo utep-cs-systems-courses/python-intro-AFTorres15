@@ -35,9 +35,10 @@ if __name__ == '__main__':
                     dictionary[word] = dictionary[word] + 1
                 else:
                     dictionary[word] = 1
+    # Puts code in Descending order
     wordOrders = sorted(dictionary.items(), key=lambda x: x[1], reverse=True)
     with open(output_file_name, "w")as outputFile:
-        # Descending order
+        # Descending order write
         for i in wordOrders:
             outputFile.write(i[0] + " " + str(i[1]) + "\n")
     outputFile.close()
